@@ -1,0 +1,11 @@
+dist
+node_modules
+tmp
+
+# vim temporaries
+*.swn
+*.swo
+*.swp
+
+# macOS stuff
+.DS_Store
