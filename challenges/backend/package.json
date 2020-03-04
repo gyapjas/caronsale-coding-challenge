@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/ts-node src/app/main.ts",
-    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts"
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts",
+    "test.w": "echo 'TODO: get it run ./node_modules/.bin/mocha --watch --recursive --watch-extensions ts --compilers ts:ts-node/register ./src/**/*.spec.ts'",
+    "test.ww": "echo 'workaround for `test.w`'; nodemon  -e ts -x 'npm test'"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +19,10 @@
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.10",
+    "@types/mocha": "^7.0.2",
+    "chai": "^4.2.0"
   }
 }
