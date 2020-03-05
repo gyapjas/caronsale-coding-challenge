@@ -6,7 +6,6 @@ export interface ICarOnSaleClientResponse {
   },
   auctionsCount: number,
   bidsAverage: number,
-  auctionProgress: number,
   auctions: Array<Auction>,
 
   public toJSON(): string

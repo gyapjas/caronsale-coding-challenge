@@ -1,6 +1,5 @@
 import 'mocha';
 import { expect } from 'chai';
-import nock from 'nock';
 import sinon from 'sinon';
 
 import DataProvider from './DataProvider';
@@ -40,7 +39,7 @@ describe('CarOnSaleClient', () => {
   describe('#getRunningAuctions()', () => {
     context('successfull', () => {
       it('should deliver user\'s auctions with some additional data', () => {
-        stubFetchAuctions({ items: [] });
+        stubFetchAuctions([]);
 
         return carOnSaleClient
           .getRunningAuctions()
