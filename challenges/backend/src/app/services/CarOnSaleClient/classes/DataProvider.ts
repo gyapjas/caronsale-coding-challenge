@@ -48,17 +48,20 @@ export default class DataProvider {
     this.props.accessToken = value;
   }
 
-  login(): Promise<any> {
+  login(): Promise<DataProvider> {
     const url = this.createUrl(`/api/v1/authentication/${ this.userEmail }`);;
     const data = { password: this.hashedPassword };
 
     return axios
       .put(url, data)
-      .then(response => this.accessToken = response.data.token);
+      .then(response => {
+        this.accessToken = response.data.token;
+        return this
+    });
   }
 
   fetchAuctions(): Promise<Array<Auction>> {
-    const url = this.createUrl('/api/v2/auction/buyer');
+    const url = this.createUrl('/api/v2/auction/buyer/');
     const headers = { ...this.createAuthHeaders() };
 
     return axios

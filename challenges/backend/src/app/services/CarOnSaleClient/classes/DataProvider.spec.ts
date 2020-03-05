@@ -89,7 +89,7 @@ describe('DataProvider', () => {
         };
 
       scope = nock(dataProvider.server, { reqheaders })
-        .get(`/api/v2/auction/buyer`);
+        .get(`/api/v2/auction/buyer/`);
     })
 
     it('should return a Promise', () => {

@@ -3,18 +3,32 @@ import {ILogger} from "./services/Logger/interface/ILogger";
 import {DependencyIdentifier} from "./DependencyIdentifiers";
 import "reflect-metadata";
 
+import CarOnSaleClient from './services/CarOnSaleClient/classes/CarOnSaleClient';
+
 @injectable()
 export class AuctionMonitorApp {
 
     public constructor(@inject(DependencyIdentifier.LOGGER) private logger: ILogger) {
     }
 
-    public async start(): Promise<void> {
+    public async start(): Promise<number> {
 
         this.logger.log(`Auction Monitor started.`);
 
         // TODO: Retrieve auctions and display aggregated information (see README.md)
 
+      const service = new CarOnSaleClient();
+
+      return service
+        .getRunningAuctions()
+        .then(response => {
+          console.log(response);
+          return 0;
+        })
+        .catch(error => {
+          this.logger.log(`AuctionMonitorApp.start(): ${error.message || error}`);
+          return 1;
+        });
     }
 
 }

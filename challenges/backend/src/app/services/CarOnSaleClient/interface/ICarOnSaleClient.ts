@@ -3,10 +3,10 @@
  */
 
 export { CarOnSaleClientQuery } from './CarOnSaleClientQuery';
-export { CarOnSaleClientResponse } from './CarOnSaleClientResponse';
+export { ICarOnSaleClientResponse } from './ICarOnSaleClientResponse';
 
 export interface ICarOnSaleClient {
 
-  getRunningAuctions(query?: CarOnSaleClientQuery): Promise<CarOnSaleClientResponse>
+  getRunningAuctions(query?: CarOnSaleClientQuery): Promise<ICarOnSaleClientResponse>
 
 }
