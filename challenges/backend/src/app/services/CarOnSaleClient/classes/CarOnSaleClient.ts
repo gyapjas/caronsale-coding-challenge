@@ -1,3 +1,6 @@
+import {injectable} from "inversify";
+import "reflect-metadata";
+
 // I like this way
 // import { ICarOnSaleClient, CarOnSaleClientQuery, CarOnSaleClientResponse } from './../interface/ICarOnSaleClient';
 // but more people like this
@@ -10,6 +13,7 @@ import {
 import DataProvider from './DataProvider';
 import CarOnSaleClientResponse from './CarOnSaleClientResponse';
 
+@injectable()
 export default class CarOnSaleClient implements ICarOnSaleClient {
   public getRunningAuctions(query?: CarOnSaleClientQuery): Promise<ICarOnSaleClientResponse> {
 

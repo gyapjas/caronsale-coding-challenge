@@ -3,12 +3,15 @@ import {ILogger} from "./services/Logger/interface/ILogger";
 import {DependencyIdentifier} from "./DependencyIdentifiers";
 import "reflect-metadata";
 
-import CarOnSaleClient from './services/CarOnSaleClient/classes/CarOnSaleClient';
+import { ICarOnSaleClient } from './services/CarOnSaleClient/interface/ICarOnSaleClient';
 
 @injectable()
 export class AuctionMonitorApp {
 
-    public constructor(@inject(DependencyIdentifier.LOGGER) private logger: ILogger) {
+    public constructor(
+      @inject(DependencyIdentifier.LOGGER) private logger: ILogger,
+      @inject(DependencyIdentifier.CarOnSaleClient) private carOnSaleClient: ICarOnSaleClient
+    ) {
     }
 
     public async start(): Promise<any> {
@@ -17,9 +20,7 @@ export class AuctionMonitorApp {
 
         // TODO: Retrieve auctions and display aggregated information (see README.md)
 
-      const service = new CarOnSaleClient();
-
-      return service
+      return this.carOnSaleClient
         .getRunningAuctions()
         .then(response => {
           this.logger.log(response.toJSON());
