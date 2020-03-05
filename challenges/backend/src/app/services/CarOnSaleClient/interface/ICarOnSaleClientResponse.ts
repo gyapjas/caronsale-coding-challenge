@@ -8,5 +8,5 @@ export interface ICarOnSaleClientResponse {
   bidsAverage: number,
   auctions: Auction[],
 
-  public toJSON(): string
+  public toJSON(spacing?: number): string
 }

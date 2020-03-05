@@ -19,8 +19,21 @@ export default class CarOnSaleClientResponse implements ICarOnSaleClientResponse
     this.init();
   }
 
-  public toJSON(): string {
-    return this.toJSON();
+  public toJSON(spacing?: number): string {
+    spacing = spacing || 0;
+    return JSON.stringify(this.asJSON(), null, spacing);
+  }
+
+  private asJSON(): {} {
+    return [
+      'user',
+      'auctionsCount',
+      'bidsAverage',
+      'auctions'
+    ].reduce((hsh, prop) => {
+      hsh[prop] = this[prop];
+      return hsh;
+    }, {});
   }
 
   private init(): void {

@@ -11,7 +11,7 @@ export class AuctionMonitorApp {
     public constructor(@inject(DependencyIdentifier.LOGGER) private logger: ILogger) {
     }
 
-    public async start(): Promise<number> {
+    public async start(): Promise<any> {
 
         this.logger.log(`Auction Monitor started.`);
 
@@ -22,12 +22,12 @@ export class AuctionMonitorApp {
       return service
         .getRunningAuctions()
         .then(response => {
-          console.log(response);
-          return 0;
+          this.logger.log(response.toJSON());
+          process.exitCode = 0;
         })
         .catch(error => {
           this.logger.log(`AuctionMonitorApp.start(): ${error.message || error}`);
-          return 1;
+          process.exitCode = -1;
         });
     }
 
