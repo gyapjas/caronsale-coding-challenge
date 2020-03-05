@@ -12,6 +12,11 @@ describe('DataProvider', () => {
     password: 'password',
   }
 
+  beforeEach(() => {
+    nock.cleanAll();
+    nock.disableNetConnect();
+  });
+
   describe('#constructor()', () => {
     it('should create `hashedPassword` property in created instance', () => {
       expect((new DataProvider(null, null)).hashedPassword).match(/.+/);
@@ -37,7 +42,7 @@ describe('DataProvider', () => {
             token: 'access-token',
           });
 
-        dataProvider
+        return dataProvider
           .login()
           .then(() =>  {
             expect(dataProvider.accessToken).eq('access-token');
@@ -46,7 +51,7 @@ describe('DataProvider', () => {
     });
 
     context('unsuccesfull', () => {
-      it('should let bubble the error', () => {
+      it('should let bubble up the error', () => {
         const dataProvider = new DataProvider(user.email, user.password);
 
         nock(dataProvider.server)
@@ -71,25 +76,31 @@ describe('DataProvider', () => {
   });
 
   describe('#fetchAuctions()', () => {
+
+    let dataProvider;
+    let scope;
+
+    beforeEach(() => {
+      dataProvider = new DataProvider(user.email, user.password);
+
+      const reqheaders = {
+          userid: user.email,
+          authtoken: /.*/,
+        };
+
+      scope = nock(dataProvider.server, { reqheaders })
+        .get(`/api/v2/auction/buyer`);
+    })
+
     it('should return a Promise', () => {
-      const dataProvider = new DataProvider(null, null);
-
-      nock(dataProvider.server).get(/.*/, /.*/).reply(200, {});
-
+      scope.reply(200, {});
       expect(dataProvider.fetchAuctions()).be.a('promise');
     });
 
     context('succesfull', () => {
       it('should return user\'s auction(s)', () => {
-        const dataProvider = new DataProvider(user.email, user.password);
-
-        nock(dataProvider.server)
-          .get(`/api/v2/auction/buyer`)
-          .replyWithFile(200, __dirname + '/spec-data/api-v2-auction-buyer.auctions.json', {
-            'Content-Type': 'application/json',
-          });
-
-        dataProvider
+        scope.replyWithFile(200, __dirname + '/spec-data/api-v2-auction-buyer.auctions.json');
+        return dataProvider
           .fetchAuctions()
           .then( auctions =>  {
 
@@ -102,13 +113,8 @@ describe('DataProvider', () => {
     });
 
     context('unsuccesfull', () => {
-      it('should let bubble the error', () => {
-        const dataProvider = new DataProvider(user.email, user.password);
-
-        nock(dataProvider.server)
-          .get(`/api/v2/auction/buyer`)
-          .reply(401, { items: [] });
-
+      it('should let bubble up the error', () => {
+        scope.reply(401, { items: [] });
         return dataProvider
           .fetchAuctions()
           .then(() =>  {
