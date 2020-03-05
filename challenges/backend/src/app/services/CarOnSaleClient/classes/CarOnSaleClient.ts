@@ -11,7 +11,7 @@ import DataProvider from './DataProvider';
 import CarOnSaleClientResponse from './CarOnSaleClientResponse';
 
 export default class CarOnSaleClient implements ICarOnSaleClient {
-  getRunningAuctions(query?: CarOnSaleClientQuery): Promise<ICarOnSaleClientResponse> {
+  public getRunningAuctions(query?: CarOnSaleClientQuery): Promise<ICarOnSaleClientResponse> {
 
     // TODO: make it more robust
     // TODO: dont use password(s) hardcoded or whatever that goes to repo (hier ist enabled for challenge by company)

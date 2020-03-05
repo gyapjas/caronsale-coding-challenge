@@ -1,5 +1,6 @@
 // see `IAuction` in https://caronsale-backend-service-dev.herokuapp.com/swagger/
 
 // hier is a very simple simplification as placeholder:
-export default type Auction {
+export type Auction {
+  [name: string]: any;
 }

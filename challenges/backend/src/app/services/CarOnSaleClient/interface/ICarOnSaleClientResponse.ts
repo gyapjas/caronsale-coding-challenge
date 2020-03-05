@@ -1,4 +1,4 @@
-import Auction from './../types/Auction';
+import { Auction } from './../types/Auction';
 
 export interface ICarOnSaleClientResponse {
   user: {
@@ -6,7 +6,7 @@ export interface ICarOnSaleClientResponse {
   },
   auctionsCount: number,
   bidsAverage: number,
-  auctions: Array<Auction>,
+  auctions: Auction[],
 
   public toJSON(): string
 }

@@ -1,7 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
 
-import Auction from './../types/Auction';
+import { Auction } from './../types/Auction';
 import CarOnSaleClientResponse from './CarOnSaleClientResponse';
 
 describe('CarOnSaleClientResponse', () => {
@@ -11,7 +11,7 @@ describe('CarOnSaleClientResponse', () => {
     password: '',
   }
 
-  function createResponse(auctions?: Array<Auction>) {
+  function createResponse(auctions?: Auction[]) {
     auctions = auctions || []
     return new CarOnSaleClientResponse(user, auctions);
   }

@@ -5,7 +5,7 @@ import { hashPassword } from './passwordHelper';
 
 describe('#hashPassword', () => {
   // small tip: use this spec when u need to login into API on WEB, dont forget NOT to check-in into repo
-  // change 1st `foo` to plain password and u will see the hashed one in error message as spec fails 
+  // change 1st `foo` to plain password and u will see the hashed one in error message as spec fails
   const hashedFoo = 'a5916f44d73131c21b7b447b36936a1ee31022115baa5cb683b8a420463ee55942755971ccd7d35a8a61993ee1ff6555abf8bf2556f15e8e59467d273c3b12e1'
   it(`should return ${hashedFoo}, when password is \`foo\` and cycles not given`, () => {
     expect(hashPassword('foo')).eq(hashedFoo);

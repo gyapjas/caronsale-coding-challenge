@@ -7,7 +7,8 @@
     "start": "./node_modules/.bin/ts-node src/app/main.ts",
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts",
     "test.w": "echo 'TODO: get it run ./node_modules/.bin/mocha --watch --recursive --watch-extensions ts --compilers ts:ts-node/register ./src/**/*.spec.ts'",
-    "test.ww": "echo 'workaround for `test.w`'; nodemon  -e ts -x 'npm test'"
+    "test.ww": "echo 'workaround for `test.w`'; nodemon  -e ts -x 'npm test'",
+    "tslint": "tslint --project ./tsconfig.json"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "mocha": "^5.2.0",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.1.0",
+    "tslint": "^6.0.0",
     "typescript": "^3.4.5"
   },
   "devDependencies": {

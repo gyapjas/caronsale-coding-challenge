@@ -61,10 +61,10 @@ describe('DataProvider', () => {
         return dataProvider
           .login()
           .then(() =>  {
-            throw 'Error has been catched in DataProvide#login()';
+            throw new Error('Error has been catched in DataProvide#login()');
           })
           .catch(error => {
-            if (typeof error == 'string') {
+            if (error.message === 'Error has been catched in DataProvide#login()') {
               throw error;
             }
             else {
@@ -118,10 +118,10 @@ describe('DataProvider', () => {
         return dataProvider
           .fetchAuctions()
           .then(() =>  {
-            throw 'Error has been catched in DataProvide#fetchAuctions()';
+            throw new Error('Error has been catched in DataProvide#fetchAuctions()');
           })
           .catch(error => {
-            if (typeof error == 'string') {
+            if (error.message === 'Error has been catched in DataProvide#fetchAuctions()') {
               throw error;
             }
             else {

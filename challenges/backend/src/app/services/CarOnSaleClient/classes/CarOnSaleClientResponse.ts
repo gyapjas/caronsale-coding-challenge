@@ -1,16 +1,16 @@
 import { ICarOnSaleClientResponse } from './../interface/ICarOnSaleClient';
-import Auction from './../types/Auction';
+import { Auction } from './../types/Auction';
 
 export default class CarOnSaleClientResponse implements ICarOnSaleClientResponse {
-  user: {
+  public user: {
     email: string,
   };
-  auctionsCount: number;
-  bidsAverage: number;
-  auctionProgress: number;
-  auctions: Array<Auction>;
+  public auctionsCount: number;
+  public bidsAverage: number;
+  public auctionProgress: number;
+  public auctions: Auction[];
 
-  constructor(user, auctions: Array<Auction>) {
+  public constructor(user, auctions: Auction[]) {
     this.user = { email: user.email };
     this.auctionsCount = 0;
     this.bidsAverage = 0;
@@ -19,7 +19,7 @@ export default class CarOnSaleClientResponse implements ICarOnSaleClientResponse
     this.init();
   }
 
-  toJSON(): string {
+  public toJSON(): string {
     return this.toJSON();
   }
 
@@ -27,7 +27,7 @@ export default class CarOnSaleClientResponse implements ICarOnSaleClientResponse
     const aggregated = this.auctions.reduce( (hsh, auction) => {
       ++hsh.auctionsCount;
       hsh.sumNumBids = hsh.sumNumBids + (auction.numBids || 0);
-      auction.auctionProgress = (auction.minimumRequiredAsk || 0) != 0
+      auction.auctionProgress = (auction.minimumRequiredAsk || 0) !== 0
         ? (auction.currentHighestBidValue || 0) / auction.minimumRequiredAsk
         : 0;
       return hsh

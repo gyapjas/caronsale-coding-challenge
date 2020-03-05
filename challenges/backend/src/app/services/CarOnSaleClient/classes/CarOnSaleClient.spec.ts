@@ -56,10 +56,10 @@ describe('CarOnSaleClient', () => {
         return carOnSaleClient
           .getRunningAuctions()
           .then(() =>  {
-            throw 'Error has been catched in CarOnSaleClient#getRunnningAuctions()';
+            throw new Error('Error has been catched in CarOnSaleClient#getRunnningAuctions()');
           })
           .catch(error => {
-            if (typeof error == 'string') {
+            if (error.message === 'Error has been catched in CarOnSaleClient#getRunnningAuctions()') {
               throw error;
             }
             else {

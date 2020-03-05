@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import Auction from './../types/Auction';
+import { Auction } from './../types/Auction';
 import { hashPassword } from './../helpers/passwordHelper';
 
 // TODO: introduce settings.json or similar and `SERVER` should be defined there and picked up from there
@@ -8,14 +8,14 @@ import { hashPassword } from './../helpers/passwordHelper';
 const SERVER = 'https://caronsale-backend-service-dev.herokuapp.com';
 
 export default class DataProvider {
-  props: {
+  private props: {
     accessToken: string,
     hashedPassword: string,
     server: string,
     userEmail: string,
   };
 
-  constructor(userEmail: string, plainPassword: string) {
+  public constructor(userEmail: string, plainPassword: string) {
 
     const server = SERVER;
     const hashedPassword = hashPassword(plainPassword);
@@ -48,7 +48,7 @@ export default class DataProvider {
     this.props.accessToken = value;
   }
 
-  login(): Promise<DataProvider> {
+  public login(): Promise<DataProvider> {
     const url = this.createUrl(`/api/v1/authentication/${ this.userEmail }`);;
     const data = { password: this.hashedPassword };
 
@@ -60,7 +60,7 @@ export default class DataProvider {
     });
   }
 
-  fetchAuctions(): Promise<Array<Auction>> {
+  public fetchAuctions(): Promise<Auction[]> {
     const url = this.createUrl('/api/v2/auction/buyer/');
     const headers = { ...this.createAuthHeaders() };
 
