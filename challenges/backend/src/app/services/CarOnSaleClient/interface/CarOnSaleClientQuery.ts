@@ -3,4 +3,7 @@ export type CarOnSaleClientQuery = {
     email: string,
     password: string,
   }
+
+  // maybe in the future
+  filter?: any
 }

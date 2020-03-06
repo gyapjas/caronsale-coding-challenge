@@ -13,7 +13,7 @@ export default class DataProvider {
     hashedPassword: string,
     server: string,
     userEmail: string,
-  };
+  }
 
   public constructor(userEmail: string, plainPassword: string) {
 
@@ -44,9 +44,14 @@ export default class DataProvider {
     return this.props.userEmail;
   }
 
+  // FIXME: tslint: `ERROR: 47:3  adjacent-overload-signatures  All 'accessToken' signatures should be adjacent` but why?
+  /* tslint:disable */
+
   set accessToken(value: string) {
     this.props.accessToken = value;
   }
+
+  /* tslint:enable */
 
   public login(): Promise<DataProvider> {
     const url = this.createUrl(`/api/v1/authentication/${ this.userEmail }`);;

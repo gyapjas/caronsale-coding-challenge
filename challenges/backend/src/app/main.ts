@@ -3,8 +3,9 @@ import {ILogger} from "./services/Logger/interface/ILogger";
 import {Logger} from "./services/Logger/classes/Logger";
 import {AuctionMonitorApp} from "./AuctionMonitorApp";
 import {DependencyIdentifier} from "./DependencyIdentifiers";
-import {ICarOnSaleClient} from "./services/CarOnSaleClient/interface/ICarOnSaleClient";
+
 import CarOnSaleClient from "./services/CarOnSaleClient/classes/CarOnSaleClient";
+import { ICarOnSaleClient } from "./services/CarOnSaleClient/interface/ICarOnSaleClient";
 
 /*
  * Create the DI container.

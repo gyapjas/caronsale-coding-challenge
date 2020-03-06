@@ -14,7 +14,7 @@ export class AuctionMonitorApp {
     ) {
     }
 
-    public async start(): Promise<any> {
+    public async start(): Promise<void> {
 
         this.logger.log(`Auction Monitor started.`);
 
